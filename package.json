@@ -1,0 +1,13 @@
+{
+  "name": "kralbozguncu-chat-overlay",
+  "version": "2.0.0",
+  "description": "KralBozguncu #genel-sohbet icin ekran ustu sohbet katmani",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "devDependencies": {
+    "electron": "^45.2.3"
+  }
+}

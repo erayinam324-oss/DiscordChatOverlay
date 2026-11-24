@@ -1,0 +1,121 @@
+========================================================
+  KRALBOZGUNCU CHAT KATMANI  -  KURULUM / KULLANIM
+========================================================
+
+Bu uygulama, #genel-sohbet mesajlarini ekraninin uzerinde
+her zaman en ustte duran seffaf bir katman olarak gosterir.
+Discord'da ekran paylasirken izleyiciler bu katmani gorur.
+
+--------------------------------------------------------
+1) ILK KURULUM (tek seferlik, ~2 dakika)
+--------------------------------------------------------
+
+Uygulama hazir. Sadece StreamKit linkini almasi kaldi.
+Bu link SADECE senin Discord hesabinla alinabilir.
+
+  a) Discord masaustu uygulamasi acik ve giris yapmis olsun.
+
+  b) Masaustundeki "Chat Katmani" kisayoluna cift tikla.
+     (veya bu klasordeki Baslat.vbs)
+
+  c) Acilan pencerede "StreamKit'i Ac" butonuna bas.
+     Tarayicida https://streamkit.discord.com/overlay acilir.
+
+  d) "Install for OBS" -> Discord'da "Authorize" yap.
+
+  e) "Chat Widget" sekmesine gec.
+     Sunucu: kralbozguncu
+     Kanal : #genel-sohbet
+     Renk / yazi boyutu / golge ayarlarini yap.
+
+  f) Sayfanin verdigi
+     https://streamkit.discord.com/overlay/chat/...
+     linkini kopyala.
+
+  g) Uygulamadaki kutuya yapistir, "Kaydet ve Katmani Ac" bas.
+     Katman ekranin sag tarafinda belirir.
+
+  h) ISTEGE BAGLI - Durum (Status) widget'i:
+     StreamKit'te "Status Widget" sekmesinden aldigi linki
+     uygulamadaki 4. adim kutusuna yapistir.
+     Genislik/yukseklik ver (varsayilan 340x120), kaydet.
+     Ayri ve kucuk bir katman olarak acilir.
+     Bos birakirsan kapali kalir.
+
+--------------------------------------------------------
+2) KULLANIM
+--------------------------------------------------------
+
+  - Katmani tasimak: ustteki gorunmez 26px'lik seritten surukle.
+  - Boyutlandirmak: pencerenin kenarindan surukle.
+    (veya Ctrl+Shift+O ile genislik/yukseklik gir)
+
+  LINKI DEGISTIRMEK / YENIDEN YAPISTIRMAK:
+    - Sistem tepsisindeki (sag alttaki ^ oku) mor sohbet simgesine
+      SAG TIK -> "Ayarlar / Link Yapistir"
+    - VEYA katmanin uzerine SAG TIK -> "Ayarlar / Link Yapistir"
+    - VEYA Ctrl+Shift+O
+
+  Not: StreamKit'te gorunumu degistirdikten sonra YENI linki
+  kopyalayip bu ekrana yapistirman gerekir. Eski link eski
+  gorunumu gosterir. Yeniden Authorize etmene gerek yok.
+
+  Kisayollar:
+    Ctrl+Shift+O  Ayarlar / link degistirme
+    Ctrl+Alt+O    Ayarlar (yedek kisayol)
+    Ctrl+Shift+L  Kilitle (fare tiklamalari arkaya gecer)
+    Ctrl+Shift+H  Gizle / Goster
+    Ctrl+Shift+Q  Cikis
+
+--------------------------------------------------------
+3) DISCORD'DA EKRAN PAYLASIMI
+--------------------------------------------------------
+
+  ONEMLI: Katmanin gorunmesi icin ekran paylasiminda
+  "Tum Ekran" (Entire Screen) sec. Tek bir uygulama
+  penceresi secersen katman o pencerenin parcasi olmadigi
+  icin gorunmez.
+
+  Stage'de konusmaci olarak ekran paylasirken:
+    - Ekran paylas butonu -> Tum Ekran -> Go Live
+    - Kalite: 1080p / 60fps (asagiya bak)
+
+--------------------------------------------------------
+4) 2K / KALITE HAKKINDA
+--------------------------------------------------------
+
+  Bu bilgisayarin monutoru 1920x1080. Yani gercek 2K
+  (2560x1440) kaynak yok. Discord'da 1440p secenegi
+  gorunse bile goruntu 1080p'den yukari olceklenir;
+  ekstra detay gelmez, aksine bitrate sabit oldugu icin
+  yazi daha bulanik gorunur.
+
+  En iyi sonuc: 1080p + 60fps + "Tum Ekran" degil,
+  mumkunse OBS Projector penceresi paylasmak.
+  Chat yazisini buyuk tut (StreamKit'te font size veya
+  uygulamadaki "Yazi olcegi" ayari).
+
+--------------------------------------------------------
+5) SORUN GIDERME
+--------------------------------------------------------
+
+  - Katman bos/sey gorunmuyor:
+      Discord masaustu uygulamasi acik mi?
+      Link dogru mu (streamkit.discord.com/overlay/chat/...)?
+      Ctrl+Shift+O -> linki tekrar yapistir.
+
+  - Link calismiyor / mesaj gelmiyor:
+      StreamKit'te kanali tekrar sec, yeni link al.
+      Discord'da oturum acik olmali.
+
+  - Katman Discord penceresinin ustune geliyor:
+      Ctrl+Shift+H ile gizle, isini yap, tekrar goster.
+
+  - Uygulama acilmiyor:
+      Bu klasorde KUR.bat dosyasini bir kez calistir.
+
+--------------------------------------------------------
+KALDIRMA
+--------------------------------------------------------
+Bu klasoru sil + masaustundeki "Chat Katmani" kisayolunu sil.
+Baska bir yere hicbir sey kurulmadi.

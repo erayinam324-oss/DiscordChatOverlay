@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discord Chat Overlay — Ayarlar</title>
+  <link rel="stylesheet" href="setup.css" />
+</head>
+<body>
+  <div class="shell">
+    <!-- Custom Draggable Titlebar -->
+    <div class="titlebar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-title">Discord Chat Overlay</span>
+        <span class="brand-badge">v2.0</span>
+      </div>
+      <div class="win-actions">
+        <button id="openStreamKitTop" class="icon-btn" title="StreamKit'i Tarayıcıda Aç">↗ StreamKit</button>
+        <button id="closeBtn" class="icon-btn close-btn" title="Ayarları Kapat">✕</button>
+      </div>
+    </div>
+
+    <!-- Modern Tab Bar -->
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="chat" role="tab">💬 Sohbet</button>
+      <button class="tab" data-tab="status" role="tab">🟢 Durum Banner</button>
+      <button class="tab" data-tab="help" role="tab">⌨ Kısayollar</button>
+    </nav>
+
+    <!-- Main Scrollable Content -->
+    <main class="content">
+      <!-- TAB 1: SOHBET -->
+      <section class="panel active" id="panel-chat">
+        <div class="group">
+          <div class="group-head">
+            <label for="url">StreamKit Sohbet Linki</label>
+            <span class="tag">Zorunlu</span>
+          </div>
+          <input id="url" type="text" spellcheck="false" placeholder="https://streamkit.discord.com/overlay/chat/..." />
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <label for="chatDelaySec">Sohbet Gecikmesi (Chat Delay)</label>
+            <span id="delayBadge" class="pill">Kapalı</span>
+          </div>
+          <input id="chatDelaySec" type="range" min="0" max="60" step="1" value="0" />
+          <div class="presets">
+            <button type="button" class="preset" data-delay="0">Kapalı</button>
+            <button type="button" class="preset" data-delay="3">3 sn</button>
+            <button type="button" class="preset" data-delay="5">5 sn</button>
+            <button type="button" class="preset" data-delay="10">10 sn</button>
+            <button type="button" class="preset" data-delay="15">15 sn</button>
+          </div>
+          <p class="desc">Yeni gelen sohbet mesajları seçtiğin süre kadar bekleyip yumuşak animasyonla ekrana düşer.</p>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <label for="fontScale">Yazı Ölçeği</label>
+            <span id="scaleBadge" class="pill">%100</span>
+          </div>
+          <input id="fontScale" type="range" min="0.75" max="1.5" step="0.05" value="1" />
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="width">Genişlik (px)</label>
+            <input id="width" type="number" min="160" max="3000" />
+          </div>
+          <div class="field">
+            <label for="height">Yükseklik (px)</label>
+            <input id="height" type="number" min="60" max="3000" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="background">Arka Plan Stili</label>
+          <select id="background">
+            <option value="transparent">Şeffaf (sadece yazılar)</option>
+            <option value="dark">Modern koyu cam kutu</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- TAB 2: DURUM BANNER -->
+      <section class="panel" id="panel-status">
+        <div class="group">
+          <div class="group-head">
+            <label for="url2">StreamKit Durum (Status) Linki</label>
+            <span class="tag muted">İsteğe bağlı</span>
+          </div>
+          <input id="url2" type="text" spellcheck="false" placeholder="https://streamkit.discord.com/overlay/status/..." />
+          <p class="desc">Boş bırakırsan durum banner'ı kapalı kalır.</p>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <label for="statusRefreshSec">Anlık Online Güncelleme Sıklığı</label>
+            <span id="refreshBadge" class="pill">15 sn</span>
+          </div>
+          <input id="statusRefreshSec" type="range" min="5" max="60" step="5" value="15" />
+          <p class="desc">Sunucudaki çevrimiçi kişi sayısını belirlediğin aralıkta otomatik ve titremesiz günceller.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="width2">Genişlik (px)</label>
+            <input id="width2" type="number" min="160" max="3000" />
+          </div>
+          <div class="field">
+            <label for="height2">Yükseklik (px)</label>
+            <input id="height2" type="number" min="60" max="3000" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="background2">Arka Plan Stili</label>
+          <select id="background2">
+            <option value="transparent">Şeffaf</option>
+            <option value="dark">Modern koyu cam kutu</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- TAB 3: KISAYOLLAR & KURULUM -->
+      <section class="panel" id="panel-help">
+        <div class="shortcut-list">
+          <div class="shortcut-item">
+            <span>Ayarları Aç</span>
+            <div><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>O</kbd></div>
+          </div>
+          <div class="shortcut-item">
+            <span>Kilitle / Tıklama Geçir</span>
+            <div><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>L</kbd></div>
+          </div>
+          <div class="shortcut-item">
+            <span>Katmanları Gizle / Göster</span>
+            <div><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>H</kbd></div>
+          </div>
+          <div class="shortcut-item">
+            <span>Uygulamadan Çık</span>
+            <div><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd></div>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <label for="updateRepo">Otomatik Güncelleme (GitHub Repo)</label>
+            <span class="tag muted">İsteğe bağlı</span>
+          </div>
+          <input id="updateRepo" type="text" spellcheck="false" placeholder="kullaniciadi/DiscordChatOverlay" />
+          <p class="desc">GitHub repo adını buraya yazarsan uygulama her açıldığında yeni sürümü otomatik indirip kendini günceller (ayarların silinmez).</p>
+        </div>
+
+        <div class="guide-box">
+          <strong>Hızlı Kurulum</strong>
+          <ol>
+            <li>Discord masaüstü uygulaması açıkken yukarıdaki <em>↗ StreamKit</em> butonuna tıkla.</li>
+            <li><em>Install for OBS → Authorize</em> yaptıktan sonra <strong>Chat Widget</strong> linkini kopyalayıp Sohbet sekmesine yapıştır.</li>
+            <li>İstersen <strong>Status Widget</strong> linkini de Durum Banner sekmesine ekle.</li>
+          </ol>
+          <p class="desc">İpucu: Katmanı taşımak için üst kenardaki ince tutamacı sürükle, sağ tıkla hızlı menüyü aç.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="footer">
+      <p id="msg" class="msg"></p>
+      <div class="footer-actions">
+        <button id="quitBtn" class="btn ghost">Çıkış</button>
+        <button id="save" class="btn primary">Kaydet ve Katmanları Aç</button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="setup.js"></script>
+</body>
+</html>
