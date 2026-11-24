@@ -28,7 +28,7 @@ const DEFAULTS = {
   background2: 'transparent',
   statusRefreshSec: 15,
   // Otomatik guncelleme (GitHub: "kullanici/repo")
-  updateRepo: ''
+  updateRepo: 'erayinam324-oss/DiscordChatOverlay'
 };
 
 const SPECS = {
