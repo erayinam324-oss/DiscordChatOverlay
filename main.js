@@ -193,7 +193,9 @@ function applyOverlayCSS(spec, wdw) {
     #__dragbar:hover::after {
       background: rgba(255, 255, 255, 0.55);
     }
-    .__delayed_msg_hidden {
+    body[data-chat-delay="1"] li:not([data-delay-ready="1"]),
+    body[data-chat-delay="1"] [class*="message"]:not([data-delay-ready="1"]),
+    body[data-chat-delay="1"] [class*="Message"]:not([data-delay-ready="1"]) {
       opacity: 0 !important;
       max-height: 0 !important;
       margin-top: 0 !important;
@@ -204,7 +206,7 @@ function applyOverlayCSS(spec, wdw) {
       transform: translateY(10px) !important;
       pointer-events: none !important;
     }
-    .__delayed_msg_show {
+    body[data-chat-delay="1"] [data-delay-ready="1"] {
       transition: opacity 0.28s ease, transform 0.28s ease, max-height 0.28s ease !important;
     }
   `;
@@ -234,37 +236,42 @@ function injectChatDelay(wdw, delaySec) {
         window.__chatDelayObserver.disconnect();
         window.__chatDelayObserver = null;
       }
-      if (window.__chatDelayMs <= 0) return;
+      if (window.__chatDelayMs <= 0) {
+        document.body.removeAttribute('data-chat-delay');
+        return;
+      }
 
-      // Mevcut mesajlari isaretle ki sadece yeni gelenler geciksin
+      // Mevcut mesajlari gorunur isaretle, sonra CSS gizleme modunu ac
       document.querySelectorAll('li, [class*="message"], [class*="Message"]').forEach(function(el) {
-        el.dataset.__seen = '1';
+        el.setAttribute('data-delay-ready', '1');
       });
+      document.body.setAttribute('data-chat-delay', '1');
 
-      function handleNode(node) {
+      function scheduleReveal(node) {
         if (!node || node.nodeType !== 1) return;
-        if (node.id === '__dragbar' || node.dataset.__seen) return;
+        if (node.id === '__dragbar' || node.getAttribute('data-delay-ready') === '1' || node.dataset.__scheduled) return;
         var cls = (typeof node.className === 'string') ? node.className : '';
         var isMsg = node.tagName === 'LI' || /message/i.test(cls);
-        if (!isMsg) return;
-
-        node.dataset.__seen = '1';
-        var d = window.__chatDelayMs || 0;
-        if (d <= 0) return;
-
-        node.classList.add('__delayed_msg_hidden');
-        setTimeout(function() {
-          if (!node.isConnected) return;
-          node.classList.add('__delayed_msg_show');
-          node.classList.remove('__delayed_msg_hidden');
-        }, d);
+        if (isMsg) {
+          node.dataset.__scheduled = '1';
+          var d = window.__chatDelayMs || 0;
+          setTimeout(function() {
+            if (!node.isConnected) return;
+            node.setAttribute('data-delay-ready', '1');
+            node.querySelectorAll('li, [class*="message"], [class*="Message"]').forEach(function(ch) {
+              ch.setAttribute('data-delay-ready', '1');
+            });
+          }, d);
+        } else if (node.querySelectorAll) {
+          node.querySelectorAll('li, [class*="message"], [class*="Message"]').forEach(scheduleReveal);
+        }
       }
 
       var obs = new MutationObserver(function(mutations) {
         for (var i = 0; i < mutations.length; i++) {
           var added = mutations[i].addedNodes;
           for (var j = 0; j < added.length; j++) {
-            handleNode(added[j]);
+            scheduleReveal(added[j]);
           }
         }
       });
