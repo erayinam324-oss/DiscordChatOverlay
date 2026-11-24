@@ -8,6 +8,7 @@ if (window.location.protocol === 'file:') {
     saveConfig: (cfg) => ipcRenderer.invoke('save-config', cfg),
     closeSettings: () => ipcRenderer.invoke('close-settings'),
     openStreamKit: () => ipcRenderer.invoke('open-streamkit'),
+    checkUpdates: () => ipcRenderer.invoke('check-updates'),
     quit: () => ipcRenderer.invoke('quit-app')
   });
 }

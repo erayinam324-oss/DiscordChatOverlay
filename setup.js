@@ -75,6 +75,24 @@ $('openStreamKitTop').addEventListener('click', async () => {
   }
 });
 
+$('checkUpdateTop').addEventListener('click', async () => {
+  showMsg('Güncellemeler kontrol ediliyor...', true);
+  try {
+    const res = await window.overlayAPI.checkUpdates();
+    if (!res || res.status === 'no-repo') {
+      showMsg('Önce Kısayollar sekmesinden GitHub repo adını gir.', false);
+    } else if (res.status === 'up-to-date') {
+      showMsg(`En güncel sürümü kullanıyorsun (v${res.version}).`, true);
+    } else if (res.status === 'updated') {
+      showMsg(`Yeni sürüm (v${res.version}) indirildi, yeniden başlatılıyor...`, true);
+    } else {
+      showMsg('Güncelleme kontrol edilemedi: ' + (res.error || 'Bilinmeyen hata'), false);
+    }
+  } catch (e) {
+    showMsg('Güncelleme hatası: ' + e.message, false);
+  }
+});
+
 $('closeBtn').addEventListener('click', () => {
   window.overlayAPI.closeSettings();
 });

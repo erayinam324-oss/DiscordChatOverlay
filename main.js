@@ -744,6 +744,9 @@ function createTray() {
     });
     if (windows.chat && !windows.chat.isDestroyed()) windows.chat.focus();
   });
+  tray.on('double-click', () => {
+    openSettings();
+  });
   updateTray();
 }
 
@@ -826,6 +829,10 @@ ipcMain.handle('open-streamkit', async () => {
   return true;
 });
 
+ipcMain.handle('check-updates', async () => {
+  return await checkForUpdates(false);
+});
+
 ipcMain.handle('quit-app', () => {
   app.quit();
   return true;
@@ -839,11 +846,13 @@ if (!gotLock) {
   app.quit();
 } else {
   app.on('second-instance', () => {
-    if (windows.chat) {
-      if (windows.chat.isMinimized()) windows.chat.restore();
-      windows.chat.show();
-      windows.chat.focus();
-    }
+    Object.values(windows).forEach((w) => {
+      if (w && !w.isDestroyed()) {
+        if (w.isMinimized()) w.restore();
+        w.show();
+      }
+    });
+    openSettings();
   });
 
   app.whenReady().then(() => {
