@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Discord Chat Overlay</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="head">
+      <div class="brand">
+        <span class="dot"></span>
+        <strong>Discord Chat Overlay</strong>
+        <span class="badge">Chrome</span>
+      </div>
+      <label class="switch" title="Katmanı Aç / Kapat">
+        <input id="enabled" type="checkbox" checked />
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <div class="group">
+      <label for="chatUrl">StreamKit Sohbet Linki</label>
+      <input id="chatUrl" type="text" spellcheck="false" placeholder="https://streamkit.discord.com/overlay/chat/..." />
+    </div>
+
+    <div class="group">
+      <label for="statusUrl">StreamKit Durum Banner Linki (İsteğe bağlı)</label>
+      <input id="statusUrl" type="text" spellcheck="false" placeholder="https://streamkit.discord.com/overlay/status/..." />
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="background">Arka Plan</label>
+        <select id="background">
+          <option value="transparent">Şeffaf</option>
+          <option value="dark">Koyu Cam</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="opacity">Opaklık: <span id="opVal">%100</span></label>
+        <input id="opacity" type="range" min="30" max="100" step="5" value="100" />
+      </div>
+    </div>
+
+    <div class="toggle-row">
+      <span>🔒 Kilitle (Tıklama Geçir)</span>
+      <label class="switch">
+        <input id="clickThrough" type="checkbox" />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="actions">
+      <button id="resetPos" class="btn ghost" type="button">Konumu Sıfırla</button>
+      <button id="save" class="btn primary" type="button">Kaydet ve Uygula</button>
+    </div>
+    <p id="msg" class="msg"></p>
+    <p class="hint">Kısayollar: <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>L</kbd> Kilitle · <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd> Gizle/Göster</p>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

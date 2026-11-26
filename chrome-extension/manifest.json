@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Discord Chat Overlay",
+  "version": "1.0.0",
+  "description": "Chrome penceresi içinde çalışan şeffaf Discord StreamKit sohbet ve durum katmanı (Discord ekran paylaşımında görünür).",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Discord Chat Overlay"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
